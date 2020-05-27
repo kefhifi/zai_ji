@@ -23,5 +23,3 @@ string="金字塔"
 # string="美洲"
 search(string, content)
 
-
-
