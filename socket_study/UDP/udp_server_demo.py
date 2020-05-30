@@ -19,9 +19,9 @@ def recv_msg(udp_socket):
 def main():
     # 创建套接字
     udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    address=("192.168.0.6", 8080)
+    address=("192.168.0.6", 39318)
     # udp_socket.bind(address)
-    udp_socket.bind(("", 8080))  # 参数也是元组类型的
+    udp_socket.bind(("", 39318))  # 参数也是元组类型的
     while True:
         client_ip_port = recv_msg(udp_socket)
         send_msg(udp_socket, client_ip_port)
