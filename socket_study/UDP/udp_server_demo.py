@@ -5,7 +5,10 @@ def send_msg(udp_socket, ip_port):
     udp_socket.sendto(msg.encode("utf-8"), ip_port)
 
 def recv_msg(udp_socket):
-    recv_data = udp_socket.recvfrom(1024)
+    try:
+        recv_data = udp_socket.recvfrom(1024)
+    except:
+        print("error")
     msg = recv_data[0].decode("utf-8")
     ip_port = recv_data[1]  # 是一个元组类型
     print("From Client: " + ip_port[0] + ":" + str(ip_port[1])+ ":     " + msg)

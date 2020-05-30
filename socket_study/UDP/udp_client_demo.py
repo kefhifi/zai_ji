@@ -4,7 +4,7 @@ import socket
 # 创建套接字
 udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # 准备接收方地址和端口
-address=("192.168.0.6", 8080)  # 是一个元组类型的
+address=("119.45.0.4", 39318)  # 是一个元组类型的
 while True:
     send_data = input("Please input info: ")  # 从键盘获取数据
     if send_data == "quit":
