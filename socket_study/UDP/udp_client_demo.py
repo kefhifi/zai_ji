@@ -11,6 +11,7 @@ while True:
         break
     # 发送数据
     udp_socket.sendto(send_data.encode("utf-8"), address)
+#    udp_socket.sendto(b"hello", address)
     # 接收对方发送过来的数据
     recv_data = udp_socket.recvfrom(1024)
     # 显示接收到的数据

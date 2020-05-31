@@ -3,6 +3,7 @@ import socket
 def send_msg(udp_socket, ip_port):
     msg = input("input send message: ")
     udp_socket.sendto(msg.encode("utf-8"), ip_port)
+#    udp_socket.sendto(b"Hello", ip_port)  # 字符串前面加b，转换成字节流
 
 def recv_msg(udp_socket):
     try:
@@ -28,13 +29,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
 
