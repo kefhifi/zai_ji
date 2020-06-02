@@ -14,7 +14,7 @@ def main():
     print("waiting client to connet ......")
     print(client_addr)
     recv_data = new_socket.recv(1024)
-    print(recv_data)
+    print(recv_data.decode("utf-8"))
     new_socket.send("Hi".encode("utf-8"))
     new_socket.close()
     tcp_socket.close()
