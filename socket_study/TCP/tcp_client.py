@@ -9,7 +9,7 @@ def main():
         if send_data != "quit":
             tcp_socket.send(send_data.encode("utf-8"))
             recv_data = tcp_socket.recv(1024)
-            print("From Server: " + recv_data[1][0] + ":" + str(recv_data[1][1]) + ":  " recv_data[0].decode("utf-8"))
+            print("From Server: " + recv_data[1][0] + ":" + str(recv_data[1][1]) + ":  " + recv_data[0].decode("utf-8"))
         else:
             break
     tcp_socket.close()
