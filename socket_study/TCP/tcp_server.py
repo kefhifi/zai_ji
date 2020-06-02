@@ -17,7 +17,11 @@ def main():
         while True:
             recv_data = new_socket.recv(1024)
             recv_data = recv_data.decode("utf-8") # recv_data 里面只有数据，没有地址和端口（和udp的recvfrom接收到的数据不一样)
-            print(recv_data)
+            if recv_data:
+                print(recv_data)
+            else: # 如果recv_data为空，则证明客户端关闭了连接
+                print("client is away.")
+                break
             new_socket.send("Hi".encode("utf-8"))
         new_socket.close()
     tcp_socket.close()
