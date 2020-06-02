@@ -5,7 +5,7 @@ def main():
     tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     tcp_socket.connect(("119.45.0.4", 39318))
     while True:
-        send_data = input("Please input message("quit" to exit): ")
+        send_data = input("Please input message('quit' to exit): ")
         if send_data != "quit":
             tcp_socket.send(send_data.encode("utf-8"))
             recv_data = tcp_socket.recv(1024)
