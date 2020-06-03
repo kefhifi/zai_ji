@@ -14,7 +14,7 @@ def main():
     download_socket.connect(addr_port)
     file_name = input("input file name: ")
     download_socket.send(file_name.encode("utf-8"))
-    with open("file_name", "wb") as file_obj:
+    with open(file_name, "wb") as file_obj:
         while True:
             recv_data = download_socket.recv(1024)
             if recv_data:
