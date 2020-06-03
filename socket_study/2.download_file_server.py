@@ -14,7 +14,7 @@ while True:
         print("open file failed.")
     else:
         while True:
-            file_content = file_obj.read(1024)
+            file_content = file_obj.read(1024)  # python读到文件结尾后是返回空字符串的。
             if file_content:
                 new_socket.send(file_content)
             else:
