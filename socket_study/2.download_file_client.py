@@ -19,6 +19,8 @@ def main():
             recv_data = download_socket.recv(1024)
             if recv_data:
                 file_obj.write(recv_data)
+            else:
+                break
     download_socket.close()
 
 if __name__ == "__main__":
