@@ -20,7 +20,8 @@ def main():
             recv_data = recv_data.decode("utf-8") # recv_data 里面只有数据，没有地址和端口（和udp的recvfrom接收到的数据不一样)
             if recv_data:
                 print(recv_data)
-                new_socket.send("Hi".encode("utf-8"))
+                send_data = input("input info: ")
+                new_socket.send(send_data.encode("utf-8"))
             else: # 如果recv_data为空，则证明客户端关闭了连接
                 print("client is away.")
                 break
