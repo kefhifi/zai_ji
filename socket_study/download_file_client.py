@@ -4,9 +4,9 @@ def main():
     download_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     addr = input("inpu server ip: ")
     port = input("input server port: ")
-    if ! addr:
+    if not addr:
         addr = "119.45.0.4"
-    if ! port:
+    if not port:
         port = 39328
     else:
         port = int(port)
