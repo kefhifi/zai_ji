@@ -4,7 +4,7 @@ import socket
 def main():
     while True:
         tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        tcp_socket.connect(("119.45.0.4", 39318))
+        tcp_socket.connect(("119.45.0.4", 39328))
         while True:
             send_data = input("Please input message('quit' to exit): ")
             if send_data != "quit":

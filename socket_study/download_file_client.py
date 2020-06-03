@@ -7,7 +7,7 @@ def main():
     if ! addr:
         addr = "119.45.0.4"
     if ! port:
-        port = 39318
+        port = 39328
     else:
         port = int(port)
     addr_port = (addr, port)
