@@ -1,7 +1,7 @@
 import socket
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(39318)
+server_socket.bind(("", 39318))
 server_socket.listen(128)
 while True:
     new_socket, client_addr = server_socket.accept()
