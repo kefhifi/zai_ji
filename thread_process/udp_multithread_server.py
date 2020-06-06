@@ -7,9 +7,10 @@ def recv_msg(udp_socket):
     while True:
         recv_data = udp_socket.recvfrom(1024)
         print(recv_data[0].decode("utf-8"))
+        ip_port = recv_data[1]
 
 
-def send_msg(udp_socket, ip_port):
+def send_msg(udp_socket):
     while True:
         msg = input("input info: ")
         udp_socket.sendto(msg.encode("utf-8"), ip_port)
@@ -20,7 +21,7 @@ def main():
     udp_socket.bind(("", 39318))
     t1 = threading.Thread(target=recv_msg, args=(udp_socket,))
     #     t2 = threading.Thread(target=send_msg, args=(udp_socket, ip, port))  # 也可以这样传递参数
-    t2 = threading.Thread(target=send_msg, args=(udp_socket, ip_port))
+    t2 = threading.Thread(target=send_msg, args=(udp_socket,))
     t1.start()
     t2.start()
 
