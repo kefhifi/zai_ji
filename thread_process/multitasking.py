@@ -14,8 +14,8 @@ def dance():
 
 
 def main():
-    t1 = threading.Thread(target=sing)
-    t2 = threading.Thread(target=dance)
+    t1 = threading.Thread(target=sing)  # 函数名，不带括号
+    t2 = threading.Thread(target=dance)  # 函数名，不带括号
     t1.start()
     t2.start()
 

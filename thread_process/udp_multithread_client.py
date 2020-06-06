@@ -13,6 +13,7 @@ def send_msg(udp_socket, ip_port):
 
 
 def recv_msg(udp_socket, ip_port):
+    # 不加下面这行报错（recv_data = udp_socket.recvfrom(1024)，SError: [WinError 10022] 提供了一个无效的参数。）为什么？
     udp_socket.sendto("hi".encode("utf-8"), ip_port)
     while True:
         recv_data = udp_socket.recvfrom(1024)
