@@ -4,6 +4,7 @@ import threading
 ip_port = ("119.45.0.4", 39318)
 
 def recv_msg(udp_socket):
+    global ip_port
     while True:
         recv_data = udp_socket.recvfrom(1024)
         print(recv_data[0].decode("utf-8"))
