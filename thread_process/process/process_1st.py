@@ -1,14 +1,16 @@
 
 import multiprocessing
-
+import time
 
 def test1():
     while True:
         print("------1-----")
+        time.sleep(1)
 
 def test2():
     while True:
         print("------2-----")
+        time.sleep(1)
 
 
 def main():
