@@ -1,0 +1,71 @@
+https://www.cnblogs.com/chinasun021/archive/2013/03/19/2969107.html
+
+　　之前调试python程序都是用print参数，感觉有点弱爆啊，最近发现python也有类似C语言gdb的工具pdb，记录下pdb的使用方法和心得。
+
+　　先找了段简单的测试程序:
+
+复制代码
+#!/usr/bin/python
+from ftplib import FTP
+import sys
+import socket
+import pdb
+def passwordCorrect(ip,port,username,password):
+        try:
+                client = FTP()
+                pdb.set_trace()
+                client.connect(ip,port)
+                client.login(username,password)
+                client.close()
+        except Exception, e:
+                pdb.set_trace()
+                client.close()
+                if str(e).find('unknown IP address')!=-1:
+                        return 2
+                return 0
+        print "correct"
+        return 1
+
+if __name__ == '__main__':
+        socket.setdefaulttimeout(3)
+        ret = passwordCorrect('127.0.0.1',21,'test','test')
+        print "return is ",ret
+复制代码
+　　pdb的常用命令说明：
+
+　　l #查看运行到哪行代码
+　　n #单步运行，跳过函数
+　　s #单步运行，可进入函数
+　　p 变量 #查看变量值
+　　b 行号 #断点设置到第几行
+　　b #显示所有断点列表
+　　cl 断点号 #删除某个断点
+　　cl #删除所有断点
+　　c #跳到下一个断点
+　　r #return当前函数
+　　exit #退出
+
+　　调试记录:
+
+　　pdb设置断点可以在程序里加入：
+
+　　import pdb
+
+　　在需要设置断点的地方加入pdb.set_trace()
+
+　　执行python -m pdb test.py
+
+复制代码
+1 [root@wh practice]# vim test.py
+2 [root@wh practice]# python -m pdb test.py
+3 > /home/practice/test.py(2)<module>()
+4 -> from ftplib import FTP
+5 (Pdb) c
+6 > /home/practice/test.py(10)passwordCorrect()
+7 -> client.connect(ip,port)
+复制代码
+按c逐个执行到下一个断点，按p ip 就可以查看变量ip的值
+
+exit退出当前函数
+
+主要用到的功能就是这些，暂且先学这些
