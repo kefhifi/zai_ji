@@ -1,0 +1,13 @@
+python基础_格式化输出（%用法和format用法）
+https://www.cnblogs.com/fat39/p/7159881.html
+
+
+
+>>> print('%o' % 20)
+24
+>>> print('%d' % 20)
+20
+>>> print('%x' % 20)
+14
+
+
