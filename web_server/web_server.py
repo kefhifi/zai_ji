@@ -20,6 +20,7 @@ def service_client(new_http_socket, i):
         new_http_socket.send(response.encode("utf-8"))
         new_http_socket.close()
 
+
 def main():
     http_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     ip_port = ("", 39328)
@@ -36,9 +37,5 @@ def main():
     http_socket.close()
 
 
-
 if __name__ == "__main__":
     main()
-
-
-
