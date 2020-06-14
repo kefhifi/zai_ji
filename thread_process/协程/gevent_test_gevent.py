@@ -41,20 +41,16 @@ def main():
         gevent.spawn(url_request, url_sohu),
         gevent.spawn(url_request, url_douyu),
         gevent.spawn(url_request, url_sina)
-
     ])
     time_mid = time.time()
     gevent.joinall([
         gevent.spawn(read_data, url_sohu),
         gevent.spawn(read_data, url_douyu),
         gevent.spawn(read_data, url_sina)
-
     ])
     time_end = time.time()
     print(time_mid-time_start)
     print(time_end-time_mid)
-
-
 
 
 if __name__ == "__main__":

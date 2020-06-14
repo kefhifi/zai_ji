@@ -15,7 +15,7 @@ with open(file_name2, "wb") as file_obj2:
             else:
                 break
 
-# 多文件拷贝
+# 多文件拷贝: 还未完成
 def cp_file(file_name1, file_name2):
     with open(file_name2, "wb") as file_obj2:
         with open(file_name1, "rb") as file_obj1:
@@ -33,10 +33,6 @@ def main():
     p1 = multiprocessing.Process(target=cp_file, args=(file_name1, file_name2))
     pool2 = multiprocessing.Pool(10)
     p1.start()
-    p2.start()
-
-
-
 
 
 if __name__ == "__main__":
