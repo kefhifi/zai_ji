@@ -11,29 +11,29 @@ import re
 
 def service_client(new_http_socket, i):
     all_recv_data = bytes("", "utf-8")
-    while True:
-        recv_data = new_http_socket.recv(1024)
-        if recv_data:
-            all_recv_data += recv_data
-        else:
-            print("....", recv_data)
-            break
-    print(all_recv_data.decode("utf-8"))
-    print("333333")
+    recv_data = new_http_socket.recv(1024)
+    if recv_data:
+        all_recv_data += recv_data
     all_recv_data = all_recv_data.decode("utf-8")
     #  假定第一行时请求行 GET，POST，PUT 等等
     all_recv_data = all_recv_data.split("\r\n")
     request_file = re.findall(" (/.*)? ", all_recv_data[0])
 # 调试到这里了
-    print("request_file: ", request_file[0])
     # GET / HTTP/1.1
-    print("Thread--", i, recv_data)
-    time.sleep(1)
+    time.sleep(0.01)
     # 拼凑响应
     response = "HTTP/1.1 200 OK\r\n"
     response += "\r\n"
-    response += "<h1>Hahahaha</h1>"
+#    response += "<h1>Hahahaha</h1>"
     new_http_socket.send(response.encode("utf-8"))
+    if request_file[0] == "/":
+        request_file[0] = "/index.html"
+    try:
+        with open("html"+request_file[0], "rb") as file_obj:
+            content = file_obj.read()
+    except:
+        content = "404 not found.".encode("utf-8")
+    new_http_socket.send(content)
     new_http_socket.close()
 
 
