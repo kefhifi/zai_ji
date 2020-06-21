@@ -13,12 +13,11 @@ def service_client(epl, new_socket_dict, socket_item, fd):
         recv_data = socket_item.recv(1024)
     except Exception as ret:
         print(ret)
-        print("微软浏览器异常了")
+        print("为啥微软edge浏览器关闭连接后，这里异常了")
         exit(0)
     if recv_data:
         recv_data = recv_data.decode("utf-8")
         #  假定第一行时请求行 GET，POST，PUT 等等
-        print("------接收到的数据------%d----%s" % (i, recv_data))
         recv_data = recv_data.split("\r\n")
         request_file = re.findall(" (/.*)? ", recv_data[0])
         # GET / HTTP/1.1
@@ -45,8 +44,6 @@ def service_client(epl, new_socket_dict, socket_item, fd):
         epl.unregister(fd)  # 可以销毁在main函数里面注册的fd
         del new_socket_dict[fd]  # 可以删除掉main函数对应字典里面的元素
         socket_item.close()
-
-
 
 
 def main():
