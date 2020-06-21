@@ -69,6 +69,7 @@ def main():
                 new_socket_dict[new_socket.fileno()] = new_socket
             else:
                 service_client(epl, new_socket_dict, new_socket_dict[fd], fd)
+                # 下面7行是调试信息，可以删掉
                 time.sleep(10)
                 print("......浏览器关闭一个连接后，看看主函数的字典里面还有没有对应的键值（因为是在子函数里面删除的），....")
                 print(new_socket_dict)
