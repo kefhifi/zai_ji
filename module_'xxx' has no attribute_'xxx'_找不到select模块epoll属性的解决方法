@@ -1,0 +1,38 @@
+
+可能性一：
+有相同的模块名
+
+https://blog.csdn.net/elaine_yoho/article/details/78863629
+
+https://blog.csdn.net/weixin_45363628/article/details/102646349
+
+
+
+可能性二：
+使用epoll时候遇到的：
+[root@tengxun_vm web_server]#  python web_server_采用epoll实现_长连接__采用非堵塞_单进程单线程实现多任务_函数里面recv不使用循环---OK.py
+Traceback (most recent call last):
+  File "web_server_采用epoll实现_长连接__采用非堵塞_单进程单线程实现多任务_函数里面recv不使用循环---OK.py", line 84, in <module>
+    main()
+  File "web_server_采用epoll实现_长连接__采用非堵塞_单进程单线程实现多任务_函数里面recv不使用循环---OK.py", line 52, in main
+    epl = select.epoll()
+AttributeError: module 'select' has no attribute 'epoll'
+
+
+原因：
+文件 “web_server_采用epoll实现_长连接__采用非堵塞_单进程单线程实现多任务_函数里面recv不使用循环---OK.py”  前面几行是下面这样的，
+恰好 gevent 下面有select模块，运行的时候导入了 gevent 里面的 select.py (/opt/python3/lib/python3.8/site-packages/gevent/select.py), 
+而这个select.py里面没有epoll属性，所以报错。
+
+解决方法： 删掉 导入 gevent 相关模块的行 即可（import gevent ; from gevent import monkey ; monkey.patch_all()）
+
+import gevent
+from gevent import monkey
+import socket
+import time
+import threading
+import re
+import select
+
+monkey.patch_all()
+
