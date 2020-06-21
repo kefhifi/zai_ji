@@ -14,37 +14,37 @@ def service_client(epl, new_socket_dict, socket_item, fd):
     except Exception as ret:
         print(ret)
         print("为啥微软edge浏览器关闭连接后，这里异常了")
-        exit(0)
-    if recv_data:
-        recv_data = recv_data.decode("utf-8")
-        print(recv_data)
-        #  假定第一行时请求行 GET，POST，PUT 等等
-        recv_data = recv_data.split("\r\n")
-        request_file = re.findall(" (/.*)? ", recv_data[0])
-        # GET / HTTP/1.1
-        # 拼凑响应
-        response_header = "HTTP/1.1 200 OK\r\n"
-        # response += "\r\n"
-        # socket_item.send(response.encode("utf-8"))
-        if request_file[0] == "/":
-            request_file[0] = "/index.html"
-        try:
-            with open("html"+request_file[0], "rb") as file_obj:
-                content = file_obj.read()
-        except:
-            content = "404 not found.".encode("utf-8")
-        response_body = content
-        # con_len = str(len(response_body))
-        # response_header = response_header + "Content-Length: " + con_len + "\r\n\r\n"
-        response_header += "Content-Length: %d\r\n\r\n" % len(response_body)
-        response_all = response_header.encode("utf-8") + response_body
-        # 下面这种方式是不行的，会提示：TypeError: string argument without an encoding
-        # response = bytes(response) + content
-        socket_item.send(response_all)
     else:
-        epl.unregister(fd)  # 可以销毁在main函数里面注册的fd
-        del new_socket_dict[fd]  # 可以删除掉main函数对应字典里面的元素
-        socket_item.close()
+        if recv_data:
+            recv_data = recv_data.decode("utf-8")
+            print(recv_data)
+            #  假定第一行时请求行 GET，POST，PUT 等等
+            recv_data = recv_data.split("\r\n")
+            request_file = re.findall(" (/.*)? ", recv_data[0])
+            # GET / HTTP/1.1
+            # 拼凑响应
+            response_header = "HTTP/1.1 200 OK\r\n"
+            # response += "\r\n"
+            # socket_item.send(response.encode("utf-8"))
+            if request_file[0] == "/":
+                request_file[0] = "/index.html"
+            try:
+                with open("html"+request_file[0], "rb") as file_obj:
+                    content = file_obj.read()
+            except:
+                content = "404 not found.".encode("utf-8")
+            response_body = content
+            # con_len = str(len(response_body))
+            # response_header = response_header + "Content-Length: " + con_len + "\r\n\r\n"
+            response_header += "Content-Length: %d\r\n\r\n" % len(response_body)
+            response_all = response_header.encode("utf-8") + response_body
+            # 下面这种方式是不行的，会提示：TypeError: string argument without an encoding
+            # response = bytes(response) + content
+            socket_item.send(response_all)
+        else:
+            epl.unregister(fd)  # 可以销毁在main函数里面注册的fd
+            del new_socket_dict[fd]  # 可以删除掉main函数对应字典里面的元素
+            socket_item.close()
 
 
 def main():
