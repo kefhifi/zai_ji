@@ -6,13 +6,17 @@ import select
 
 # 怎么判断recv接收数据完成，里面的参数设置多大？？？
 # 短链接 ：发送完数据就关闭连接，所以可使用数据为空来判断连接是否已经关闭。
+i = 0
 
 
 def service_client(epl, new_socket_dict, socket_item, fd):
+    global i
+    i += 1
     recv_data = socket_item.recv(1024)
     if recv_data:
         recv_data = recv_data.decode("utf-8")
         #  假定第一行时请求行 GET，POST，PUT 等等
+        print("------接收到的数据------%d----%s" % (i, recv_data))
         recv_data = recv_data.split("\r\n")
         request_file = re.findall(" (/.*)? ", recv_data[0])
         # GET / HTTP/1.1
@@ -65,6 +69,7 @@ def main():
                 new_socket_dict[new_socket.fileno()] = new_socket
             else:
                 service_client(epl, new_socket_dict, new_socket_dict[fd], fd)
+                time.sleep(10)
                 print("......浏览器关闭一个连接后，看看主函数的字典里面还有没有对应的键值（因为是在子函数里面删除的），....")
                 print(new_socket_dict)
                 print("....打印字典完成....")
