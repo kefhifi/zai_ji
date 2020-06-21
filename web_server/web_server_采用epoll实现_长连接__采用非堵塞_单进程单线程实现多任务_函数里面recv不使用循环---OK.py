@@ -17,6 +17,7 @@ def service_client(epl, new_socket_dict, socket_item, fd):
         exit(0)
     if recv_data:
         recv_data = recv_data.decode("utf-8")
+        print(recv_data)
         #  假定第一行时请求行 GET，POST，PUT 等等
         recv_data = recv_data.split("\r\n")
         request_file = re.findall(" (/.*)? ", recv_data[0])
