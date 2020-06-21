@@ -12,7 +12,11 @@ import re
 def service_client(new_http_socket, i):
     all_recv_data = bytes("", "utf-8")
     while True:
-        recv_data = new_http_socket.recv(1024)
+        print("......while True...start.")
+        # 阻塞在这里不是长连接的问题，是因为客户端没有断开连接，所以不会收到空数据。
+        recv_data = new_http_socket.recv(10)
+        print(recv_data.decode("utf-8"))
+        print("....after....recv.....")
         if recv_data:
             all_recv_data += recv_data
         else:
@@ -25,15 +29,16 @@ def service_client(new_http_socket, i):
     all_recv_data = all_recv_data.split("\r\n")
     request_file = re.findall(" (/.*)? ", all_recv_data[0])
 # 调试到这里了
-    print("request_file: ", request_file[0])
-    # GET / HTTP/1.1
-    print("Thread--", i, recv_data)
-    time.sleep(1)
-    # 拼凑响应
-    response = "HTTP/1.1 200 OK\r\n"
-    response += "\r\n"
-    response += "<h1>Hahahaha</h1>"
-    new_http_socket.send(response.encode("utf-8"))
+    if request_file:
+        print("request_file: ", request_file[0])
+        # GET / HTTP/1.1
+        print("Thread--", i, recv_data)
+        time.sleep(1)
+        # 拼凑响应
+        response = "HTTP/1.1 200 OK\r\n"
+        response += "\r\n"
+        response += "<h1>Hahahaha</h1>"
+        new_http_socket.send(response.encode("utf-8"))
     new_http_socket.close()
 
 

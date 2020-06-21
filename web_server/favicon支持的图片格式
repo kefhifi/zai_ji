@@ -1,0 +1,8 @@
+https://www.cnblogs.com/shinnyChen/p/3722529.html
+
+为网站设置favicon有两种方式：
+
+1、网站根目录下放置名为favicon.ico的图片，浏览器就会自动获取；
+
+2、在页面中通过<link rel="shortcut icon"  href="http://example.com/myicon.ico" />.
+
