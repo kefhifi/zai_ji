@@ -77,10 +77,7 @@ def main():
                 print("------------", epl, len(epl))
                 print("....打印epl完成....")
         time.sleep(1)
-    print(epl)
-    time.sleep(60)
     epl.close()
-    print(epl)
     http_socket.close()
 
 
