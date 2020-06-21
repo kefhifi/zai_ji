@@ -74,11 +74,10 @@ def main():
                 print(new_socket_dict)
                 print("....打印字典完成....")
                 print("......查看删除了的fd.还存在不？因为也是在子函数里面删除的.......")
-                print(epl)
+                print("------------", epl, len(epl))
                 print("....打印epl完成....")
-
-
         time.sleep(1)
+    epl.close()
     http_socket.close()
 
 
