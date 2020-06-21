@@ -13,7 +13,7 @@ def service_client(epl, new_socket_dict, socket_item, fd):
         recv_data = socket_item.recv(1024)
     except Exception as ret:
         print(ret)
-        print("为啥微软edge浏览器关闭连接后，这里异常了")
+        print("为啥微软edge浏览器关闭连接后，这里发生异常：[Errno 104] Connection reset by peer")
     else:
         if recv_data:
             recv_data = recv_data.decode("utf-8")
