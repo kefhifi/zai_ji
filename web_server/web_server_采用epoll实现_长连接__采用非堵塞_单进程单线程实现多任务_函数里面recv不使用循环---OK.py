@@ -1,12 +1,9 @@
-import gevent
-from gevent import monkey
 import socket
 import time
-import threading
 import re
 import select
 
-monkey.patch_all()
+
 # 怎么判断recv接收数据完成，里面的参数设置多大？？？
 # 短链接 ：发送完数据就关闭连接，所以可使用数据为空来判断连接是否已经关闭。
 
