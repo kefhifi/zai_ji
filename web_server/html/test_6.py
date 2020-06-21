@@ -6,34 +6,35 @@ import time
 import threading
 import re
 
+import sys
 # 怎么判断recv接收数据完成，里面的参数设置多大？？？
 # 短链接 ：发送完数据就关闭连接，所以可使用数据为空来判断连接是否已经关闭。
 
 def service_client(new_http_socket, i):
     all_recv_data = bytes("", "utf-8")
+#    print(all_recv_data)
     recv_data = new_http_socket.recv(1024)
     if recv_data:
         all_recv_data += recv_data
+    else:
+        print("....", recv_data)
+    print("..........")
+    print("Thread--", i, recv_data)
     all_recv_data = all_recv_data.decode("utf-8")
     #  假定第一行时请求行 GET，POST，PUT 等等
     all_recv_data = all_recv_data.split("\r\n")
+    print("00000000000000", all_recv_data)
     request_file = re.findall(" (/.*)? ", all_recv_data[0])
 # 调试到这里了
+    print("------file: ", request_file[0])
     # GET / HTTP/1.1
-    time.sleep(0.01)
+    print("Thread--", i, recv_data)
+    time.sleep(1)
     # 拼凑响应
     response = "HTTP/1.1 200 OK\r\n"
     response += "\r\n"
-#    response += "<h1>Hahahaha</h1>"
+    response += "<h1>Hahahaha</h1>"
     new_http_socket.send(response.encode("utf-8"))
-    if request_file[0] == "/":
-        request_file[0] = "/index.html"
-    try:
-        with open("html"+request_file[0], "rb") as file_obj:
-            content = file_obj.read()
-    except:
-        content = "404 not found.".encode("utf-8")
-    new_http_socket.send(content)
     new_http_socket.close()
 
 
@@ -49,8 +50,7 @@ def main():
         str_socket = "http_socket_" + str(i)
         thread_num = "Thread_" + str(i)
         str_socket, client_addr = http_socket.accept()
-        thread_num = threading.Thread(target=service_client, args=(str_socket, i))
-        thread_num.start()
+        service_client(str_socket, i)
         i += 1
     http_socket.close()
 
