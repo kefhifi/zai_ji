@@ -1,0 +1,14 @@
+python3 bytes拼接
+字节流可以拼接，但是需要全部转为字节流，比如：
+    all_recv_data = bytes("", "utf-8")
+    while True:
+        recv_data = new_http_socket.recv(10)
+        if recv_data:
+            all_recv_data += recv_data
+        else:
+            break
+    all_recv_data = all_recv_data.decode("utf-8")
+
+
+https://blog.csdn.net/Faith_runner/article/details/100118616?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase
+
