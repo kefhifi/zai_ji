@@ -44,6 +44,9 @@ def service_client(epl, new_socket_dict, socket_item, fd):
         del new_socket_dict[fd]
         socket_item.close()
 
+    epl.close()
+
+
 
 def main():
     http_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -68,6 +71,7 @@ def main():
                 epl.register(new_socket.fileno(), select.EPOLLIN)
                 new_socket_dict[new_socket.fileno()] = new_socket
             else:
+                print("-----start---service client------")
                 service_client(epl, new_socket_dict, new_socket_dict[fd], fd)
                 # 下面7行是调试信息，可以删掉
                 time.sleep(10)
