@@ -49,7 +49,7 @@ class WSGIServer():
                 # endswith() 方法用于判断字符串是否以指定后缀结尾，如果以指定后缀结尾返回True，否则返回False
                 header = "HTTP/1.1 200 OK\r\n\r\n"
                 body = mini_frame.application(request_file[0])
-                response = header + str(body)
+                response = header + body
                 new_http_socket.send(response.encode("utf-8"))
 
 
