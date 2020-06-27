@@ -21,4 +21,3 @@ def application(file_name):
         quit()
     else:
         return "not found the page!"
-
