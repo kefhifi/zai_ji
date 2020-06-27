@@ -1,5 +1,6 @@
 import time
 
+
 def login():
     return "....login....%s" % time.ctime()
 
@@ -14,10 +15,10 @@ def quit():
 
 def application(file_name):
     if file_name == "/login.py":
-        login()
+        return login()
     elif file_name == "/register.py":
-        register()
+        return register()
     elif file_name == "/quit.py":
-        quit()
+        return quit()
     else:
         return "not found the page!"
