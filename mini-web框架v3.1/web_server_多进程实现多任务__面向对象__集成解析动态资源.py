@@ -47,13 +47,21 @@ class WSGIServer():
             # 动态资源
             else:
                 # endswith() 方法用于判断字符串是否以指定后缀结尾，如果以指定后缀结尾返回True，否则返回False
-                header = "HTTP/1.1 200 OK\r\n\r\n"
-                body = mini_frame.application(request_file[0])
+                env = dict()
+                body = mini_frame.application(env, self.set_response_header)
+                header = "HTTP/1.1 %s \r\n" + self.status
+                for item in self.headers:
+                    header += "%s:%s\r\n" % (item[0], item[1])
+                header += "\r\n"
                 response = header + body
                 new_http_socket.send(response.encode("utf-8"))
-
-
         new_http_socket.close()
+
+
+    def set_response_header(self, status, headers):
+        self.status = status
+        self.headers = headers
+
 
     def run_forever(self):
         while True:
