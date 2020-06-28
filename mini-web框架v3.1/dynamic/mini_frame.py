@@ -23,8 +23,21 @@ import time
 #     else:
 #         return "not found the page!"
 
+def login():
+    return "这是登录页面"
 
-def application(env, set_response_header):
+
+def index():
+    return "这是主页"
+
+
+def application(environ, set_response_header):
     set_response_header("200 OK", [("Content-Type", "text/html;charset=utf-8")])
-    return "Hello World %s 测试" % time.ctime()
+    file_name = environ["PATH_INFO"]
+    if file_name == "/login.py":
+        return login()
+    elif file_name == "/index.py":
+        return index()
+    else:
+        return "Hello World %s 测试" % time.ctime()
 

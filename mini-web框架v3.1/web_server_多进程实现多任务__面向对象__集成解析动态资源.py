@@ -6,7 +6,7 @@ import time
 import threading
 import re
 import multiprocessing
-import mini_frame
+import dynamic.mini_frame
 
 # 怎么判断recv接收数据完成，里面的参数设置多大？？？
 # 短链接 ：发送完数据就关闭连接，所以可使用数据为空来判断连接是否已经关闭。
@@ -48,7 +48,8 @@ class WSGIServer():
             else:
                 # endswith() 方法用于判断字符串是否以指定后缀结尾，如果以指定后缀结尾返回True，否则返回False
                 env = dict()
-                body = mini_frame.application(env, self.set_response_header)
+                env["PATH_INFO"] = request_file[0]
+                body = dynamic.mini_frame.application(env, self.set_response_header)
                 header = "HTTP/1.1 %s\r\n" % self.status
                 for item in self.headers:
                     header += "%s:%s\r\n" % (item[0], item[1])
