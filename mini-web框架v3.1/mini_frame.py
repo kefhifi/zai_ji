@@ -25,6 +25,6 @@ import time
 
 
 def application(env, set_response_header):
-    set_response_header("200 OK", [("Content-Type", "text/html")])
-    return "Hello World %s" % time.ctime()
+    set_response_header("200 OK", [("Content-Type", "text/html;charset=utf-8")])
+    return "Hello World %s 测试" % time.ctime()
 
