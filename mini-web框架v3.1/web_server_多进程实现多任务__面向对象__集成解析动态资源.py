@@ -101,10 +101,10 @@ def main():
         return 1
     sys.path.append("./dynamic")
     print(modu_name, app_name)
-    import modu_name
-    # frame = __import__(modu_name)
-    # app = getattr(frame, app_name)  # app 指向dynami中mini_frame模块里面的application函数
-    # print(app)
+    # import modu_name  # 这样导入报错：ModuleNotFoundError: No module named 'modu_name'
+    frame = __import__(modu_name)
+    app = getattr(frame, app_name)  # app 指向 dynamic 中 mini_frame 模块里面的 application 函数
+    print(app)
 
     #wsgi_server = WSGIServer(port)
     #wsgi_server.run_forever()
