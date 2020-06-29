@@ -100,8 +100,7 @@ def main():
     else:
         print("input port error\r\nExample: python server.py 8888 mini_frame:application")
         return 1
-    sys.path.append("./dynamic")
-    print(modu_name, app_name)
+    sys.path.append("./dynamic")  # 添加模块查找路径
     # import modu_name  # 这样导入报错：ModuleNotFoundError: No module named 'modu_name'
     frame = __import__(modu_name)
     app = getattr(frame, app_name)  # app 指向 dynamic 中 mini_frame 模块里面的 application 函数
