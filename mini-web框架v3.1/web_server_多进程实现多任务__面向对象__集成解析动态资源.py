@@ -93,7 +93,7 @@ def main():
         print("3 args required \r\nExample: python server.py 8888 mini_frame:application")
         return 1
     frame_appli = re.findall("([^:]+):(.+)", frame_app)  # frame_appli 值形如：[('mini_frame', 'application')]
-    if len(frame_appli[1]) == 2:
+    if len(frame_appli[0]) == 2:
         modu_name = frame_appli[0][0]
         app_name = frame_appli[0][1]
     else:
