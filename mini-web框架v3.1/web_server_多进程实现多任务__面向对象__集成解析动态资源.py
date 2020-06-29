@@ -40,7 +40,6 @@ class WSGIServer():
                 if request_file[0] == "/":
                     request_file[0] = "/index.html"
                 try:
-                    print(self.static_path + request_file[0])
                     with open(self.static_path + request_file[0], "rb") as file_obj:
                         content = file_obj.read()
                 except:
