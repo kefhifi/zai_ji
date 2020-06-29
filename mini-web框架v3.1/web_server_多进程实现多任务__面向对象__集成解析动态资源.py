@@ -14,13 +14,14 @@ import sys
 # 短链接 ：发送完数据就关闭连接，所以可使用数据为空来判断连接是否已经关闭。
 
 class WSGIServer():
-    def __init__(self, port):
+    def __init__(self, port, app):
         self.http_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # 加上下面这行，是为了意外关闭server后，再次启动server时不会提示端口已经被占用了
         self.http_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.ip_port = ("", port)
         self.http_socket.bind(self.ip_port)
         self.http_socket.listen(128)
+        self.app = app
     def service_client(self, new_http_socket):
         all_recv_data = bytes("", "utf-8")
         recv_data = new_http_socket.recv(1024)
@@ -51,7 +52,7 @@ class WSGIServer():
                 # endswith() 方法用于判断字符串是否以指定后缀结尾，如果以指定后缀结尾返回True，否则返回False
                 env = dict()
                 env["PATH_INFO"] = request_file[0]
-                body = dynamic.mini_frame.application(env, self.set_response_header)
+                body = self.app(env, self.set_response_header)
                 header = "HTTP/1.1 %s\r\n" % self.status
                 for item in self.headers:
                     header += "%s:%s\r\n" % (item[0], item[1])
@@ -104,10 +105,9 @@ def main():
     # import modu_name  # 这样导入报错：ModuleNotFoundError: No module named 'modu_name'
     frame = __import__(modu_name)
     app = getattr(frame, app_name)  # app 指向 dynamic 中 mini_frame 模块里面的 application 函数
-    print(app)
 
-    #wsgi_server = WSGIServer(port)
-    #wsgi_server.run_forever()
+    wsgi_server = WSGIServer(port, app)
+    wsgi_server.run_forever()
 
 
 if __name__ == "__main__":
