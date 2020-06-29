@@ -95,7 +95,7 @@ def main():
     frame_appli = re.findall("([^:]+):(.+)", frame_app)
     print(frame_appli)
     sys.path.append("./dynamic")
-    if frame_app:
+    if frame_appli:
         import frame_appli[0]
 
     #wsgi_server = WSGIServer(port)
