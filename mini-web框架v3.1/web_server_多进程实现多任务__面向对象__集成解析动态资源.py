@@ -87,8 +87,10 @@ def main():
             port = int(sys.argv[1])
         except Exception as ret:
             print("input port error\r\nExample: python server.py 8888")
+            return 1
     else:
         print("2 or more args required \r\nExample: python server.py 8888")
+        return 1
     wsgi_server = WSGIServer(port)
     wsgi_server.run_forever()
 
