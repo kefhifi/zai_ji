@@ -14,7 +14,7 @@ import sys
 # 短链接 ：发送完数据就关闭连接，所以可使用数据为空来判断连接是否已经关闭。
 
 class WSGIServer():
-    def __init__(self, port, app):
+    def __init__(self, port, app, static_path):
         self.http_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # 加上下面这行，是为了意外关闭server后，再次启动server时不会提示端口已经被占用了
         self.http_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -22,6 +22,7 @@ class WSGIServer():
         self.http_socket.bind(self.ip_port)
         self.http_socket.listen(128)
         self.app = app
+        self.static_path = static_path
     def service_client(self, new_http_socket):
         all_recv_data = bytes("", "utf-8")
         recv_data = new_http_socket.recv(1024)
@@ -39,7 +40,7 @@ class WSGIServer():
                 if request_file[0] == "/":
                     request_file[0] = "/index.html"
                 try:
-                    with open("html"+request_file[0], "rb") as file_obj:
+                    with open(self.static_path + request_file[0], "rb") as file_obj:
                         content = file_obj.read()
                 except:
                     header = "HTTP/1.1 404 NOT FOUND\r\n\r\n".encode("utf-8")
@@ -100,12 +101,15 @@ def main():
     else:
         print("input port error\r\nExample: python server.py 8888 mini_frame:application")
         return 1
-    sys.path.append("./dynamic")  # 添加模块查找路径
+    with open("server.conf") as file_obj:
+        conf_info = file_obj.read()
+    conf_info = eval(conf_info)  # 通过 eval 把 conf_info 转换成字典了
+    sys.path.append(conf_info["dynamic_path"])  # 添加模块查找路径
     # import modu_name  # 这样导入报错：ModuleNotFoundError: No module named 'modu_name'
     frame = __import__(modu_name)
     app = getattr(frame, app_name)  # app 指向 dynamic 中 mini_frame 模块里面的 application 函数
 
-    wsgi_server = WSGIServer(port, app)
+    wsgi_server = WSGIServer(port, app, conf_info["static_path"])
     wsgi_server.run_forever()
 
 
