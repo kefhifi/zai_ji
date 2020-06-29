@@ -93,10 +93,16 @@ def main():
         print("3 args required \r\nExample: python server.py 8888 mini_frame:application")
         return 1
     frame_appli = re.findall("([^:]+):(.+)", frame_app)
-    print(frame_appli)
+    if len(frame_appli) == 2:
+        modu_name = frame_appli[0]
+        app_name = frame_appli[1]
+    else:
+        print("input port error\r\nExample: python server.py 8888 mini_frame:application")
+        return 1
     sys.path.append("./dynamic")
-    if frame_appli:
-        import frame_appli[0]
+    frame = __import__(modu_name)
+    app = getattr(frame, app_name)  # app 指向dynami中mini_frame模块里面的application函数
+    print(app)
 
     #wsgi_server = WSGIServer(port)
     #wsgi_server.run_forever()
