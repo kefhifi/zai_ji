@@ -7,16 +7,18 @@ import threading
 import re
 import multiprocessing
 import dynamic.mini_frame
+import sys
+
 
 # 怎么判断recv接收数据完成，里面的参数设置多大？？？
 # 短链接 ：发送完数据就关闭连接，所以可使用数据为空来判断连接是否已经关闭。
 
 class WSGIServer():
-    def __init__(self):
+    def __init__(self, port):
         self.http_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # 加上下面这行，是为了意外关闭server后，再次启动server时不会提示端口已经被占用了
         self.http_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.ip_port = ("", 39328)
+        self.ip_port = ("", port)
         self.http_socket.bind(self.ip_port)
         self.http_socket.listen(128)
     def service_client(self, new_http_socket):
@@ -80,7 +82,14 @@ class WSGIServer():
 
 
 def main():
-    wsgi_server = WSGIServer()
+    if len(sys.argv) >= 2:
+        try:
+            port = int(sys.argv[1])
+        except Exception as ret:
+            print("input port error\r\nExample: python server.py 8888")
+    else:
+        print("2 or more args required \r\nExample: python server.py 8888")
+    wsgi_server = WSGIServer(port)
     wsgi_server.run_forever()
 
 
