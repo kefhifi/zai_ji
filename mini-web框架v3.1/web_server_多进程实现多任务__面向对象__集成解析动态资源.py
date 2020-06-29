@@ -6,7 +6,7 @@ import time
 import threading
 import re
 import multiprocessing
-import dynamic.mini_frame
+# import dynamic.mini_frame
 import sys
 
 
@@ -82,17 +82,23 @@ class WSGIServer():
 
 
 def main():
-    if len(sys.argv) >= 2:
+    if len(sys.argv) == 3:
         try:
             port = int(sys.argv[1])
+            frame_app = sys.argv[2]
         except Exception as ret:
-            print("input port error\r\nExample: python server.py 8888")
+            print("input port error\r\nExample: python server.py 8888 mini_frame:application")
             return 1
     else:
-        print("2 or more args required \r\nExample: python server.py 8888")
+        print("3 args required \r\nExample: python server.py 8888 mini_frame:application")
         return 1
-    wsgi_server = WSGIServer(port)
-    wsgi_server.run_forever()
+    frame_appli = re.findall("([^:]+):(.+)", frame_app)
+    print(frame_appli)
+    if frame_app:
+        import frame_appli[0]
+
+    #wsgi_server = WSGIServer(port)
+    #wsgi_server.run_forever()
 
 
 if __name__ == "__main__":
