@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body,html,p{
+			margin:0;
+			padding:0;			
+			font-size: 14px;
+		}
+		h1{
+			text-align: center;
+		}
+		.contant{
+			width: 900px;
+		    margin: 0px auto;
+		    overflow: auto;
+		}		
+		.info{
+			text-align: right;
+		}
+		.info p{
+			float: right;
+			margin-left: 10px;
+		}
+		.info span{
+			float: left;
+			line-height: 30px;
+		}
+		.contant ul{
+			width: 100%;			
+			overflow: auto;
+    		padding: 0px;
+		}
+		.contant ul li{
+			width: 278px;
+		    float: left;
+		    list-style: none;
+		    text-align: left;
+		    line-height: 30px;
+		    border: 1px solid #ccc;
+		    padding: 5px;
+		}
+		/*.contant ul li.borderLR{
+			border-left: 1px solid #ccc;
+			border-right: 1px solid #ccc;
+		}*/
+		.iconGreen,.iconRed{
+			float:left;
+		    height: 16px;
+		    width: 16px;
+		    border-radius: 8px;
+		    margin-right: 10px;
+		    margin-top: 7px;
+		}
+		.iconGreen{
+			background: #22ff26;
+		}
+		.iconRed{
+			background: red;
+		}
+		.colorGreen{
+			color:#229926;
+			font-weight: bold;
+		}
+		.infoLi{
+			position: relative;
+		}
+		.infoSpan{
+			width: 252px;
+			float: left;
+			white-space: nowrap;
+			overflow:hidden;
+			text-overflow:ellipsis;		
+		}		
+		.infoLi .infoDiv{			
+			display: none;
+			max-width: 278px;
+			padding: 10px;		    
+		    position: absolute;
+		    background: #f2f2f2;
+		    top: 40px;		   
+		    left: 30px;
+		    border: 1px solid #f2f2f2;
+		    text-align: left;
+		}		
+		.infoLi .infoDiv .arror{
+			width: 10px;
+		    height: 10px;
+		    transform: rotate(45deg);
+		    position: absolute;
+		    top: -6px;
+		    background: #f2f2f2;
+		    z-index: -1;
+		}
+	</style>
+</head>
+<body>
+	<h1>System Status</h1>
+	<div class="contant">
+		<div class="info">			
+			<p>
+				<span class="iconRed"></span><span>Unavailable</span>
+			</p>
+			<p>
+				<span class="iconGreen"></span><span>Available</span>
+			</p>
+		</div>		
+		<ul id="serverUl">
+		</ul>
+	</div>
+	
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			var servers = [
+		        {
+		            "redirectUrl":null,
+		            "flag":true,
+		            "events":[
+		            ],
+		            "serviceName":"App Store"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Apple Arcade"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Apple Books"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Apple Business Manager"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "flag":true,
+		            "events":[
+		            ],
+		            "serviceName":"Apple Card"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		                {
+		                    "usersAffected":"Some users were affected",
+		                    "epochStartDate":1593715080000,
+		                    "epochEndDate":1593719160000,
+		                    "messageId":"2000497",
+		                    "statusType":"Issue",
+		                    "datePosted":"07/02/2020 13:06 PDT",
+		                    "startDate":"07/02/2020 11:38 PDT",
+		                    "endDate":"07/02/2020 12:46 PDT",
+		                    "affectedServices":null,
+		                    "eventStatus":"resolved",
+		                    "message":"Some users were not be able to set up Apple Cash, send and receive money, or transfer to bank with Apple Cash."
+		                }],
+		            "serviceName":"Apple Cash"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Apple ID"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Apple Music"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Apple Music Subscriptions"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Apple Online Store"
+		        },
+		        {
+		            "redirectUrl":"https://developer.apple.com/apple-pay/",
+		            "events":[
+		            ],
+		            "serviceName":"Apple Pay"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Apple School Manager"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Apple TV Channels"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Apple TV+"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"AppleCare in iOS"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Beats 1"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Device Enrollment Program"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Dictation"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Documents in the Cloud"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"FaceTime"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Find My"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Game Center"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Global Service Exchange"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Account & Sign In"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Backup"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Bookmarks & Tabs"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Calendar"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Contacts"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Drive"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Keychain"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Mail"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Notes"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Reminders"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iCloud Storage Upgrades"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		                {
+		                    "usersAffected":"Some users were affected",
+		                    "epochStartDate":1593642300000,
+		                    "epochEndDate":1593648600000,
+		                    "messageId":"1003274",
+		                    "statusType":"Issue",
+		                    "datePosted":"07/02/2020 13:06 PDT",
+		                    "startDate":"07/01/2020 15:25 PDT",
+		                    "endDate":"07/01/2020 17:10 PDT",
+		                    "affectedServices":null,
+		                    "eventStatus":"resolved",
+		                    "message":"Users experienced a problem with this service."
+		                }],
+		            "serviceName":"iCloud Web Apps (iCloud.com)"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iMessage"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iOS Device Activation"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iTunes Match"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iTunes Store"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iTunes U"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"iWork for iCloud"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Mac App Store"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"macOS Software Update"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Mail Drop"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Maps Display"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Maps Routing & Navigation"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Maps Search"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Maps Traffic"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"News"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Photos"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Radio"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Schoolwork"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Screen Time"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Sign in with Apple"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Siri"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Spotlight suggestions"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Volume Purchase Program"
+		        },
+		        {
+		            "redirectUrl":null,
+		            "events":[
+		            ],
+		            "serviceName":"Walkie-Talkie"
+		        }
+		    ]
+		    var str = '';
+			servers.forEach((item,index)=>{
+				let className = item.flag?'icon iconRed':'icon iconGreen';
+				if(item.events && item.events.length>0){
+					str += "<li class='infoLi'>"+
+						"<span class='"+className+"'></span>"+
+						"<span class='infoSpan'>"+
+							"<a class='li"+index+"' href='javascript:;' onClick='showInfo(\"li"+index+"\")'>"+item.serviceName+'-'+item.events[0].eventStatus+' '+item.events[0].statusType+
+							"</a>"+
+						"</span>"+
+						"<div class='infoDiv'>"+
+							"<p class='arror'></p>"+
+							"<p>"+item.serviceName+'- <span class="colorGreen">'+item.events[0].eventStatus+' '+item.events[0].statusType+"</span></p>"+
+							"</br>"+
+							"<p>"+dateFormat("YYYY-mm-dd HH:MM",new Date(item.events[0].epochStartDate))+' - '+dateFormat("YYYY-mm-dd HH:MM",new Date(item.events[0].epochEndDate))+"</p>"+
+							"<p>"+item.events[0].usersAffected+"</p>"+
+							"<p>"+item.events[0].message+"</p>"+
+						"</div>"
+					"</li>";
+				}else{
+					str += '<li>'+
+						'<span class="'+className+'"></span>'+
+						'<span class="infoSpan">'+item.serviceName+'</span>'+
+					'</li>';	
+				}
+				
+			});
+			$('#serverUl').append(str);
+		});
+		function showInfo(liClass){
+			$('.'+liClass).parent().next().toggle();
+			// 点击其他地方弹窗隐藏
+			$(document).off('click');
+			$(document).on('click',(e)=>{
+                 var divTop = $('.'+liClass);                  
+                 if(!divTop.is(e.target) && divTop.has(e.target).length === 0){
+                   $('.'+liClass).parent().next().hide();
+                }
+            })
+		}
+		//日期格式化
+		function dateFormat(fmt, date) {
+		    let ret;
+		    const opt = {
+		        "Y+": date.getFullYear().toString(),        // 年
+		        "m+": (date.getMonth() + 1).toString(),     // 月
+		        "d+": date.getDate().toString(),            // 日
+		        "H+": date.getHours().toString(),           // 时
+		        "M+": date.getMinutes().toString(),         // 分
+		        "S+": date.getSeconds().toString()          // 秒
+		        // 有其他格式化字符需求可以继续添加，必须转化成字符串
+		    };
+		    for (let k in opt) {
+		        ret = new RegExp("(" + k + ")").exec(fmt);
+		        if (ret) {
+		            fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+		        };
+		    };
+		    return fmt;
+		}
+	</script>
+</body>
+</html>
