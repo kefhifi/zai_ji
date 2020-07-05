@@ -23,6 +23,9 @@ class WSGIServer():
         self.http_socket.listen(128)
         self.app = app
         self.static_path = static_path
+        self.status = 0
+        self.headers = []
+
     def service_client(self, new_http_socket):
         all_recv_data = bytes("", "utf-8")
         recv_data = new_http_socket.recv(1024)
@@ -62,12 +65,10 @@ class WSGIServer():
                 new_http_socket.send(response.encode("utf-8"))
         new_http_socket.close()
 
-
     def set_response_header(self, status, headers):
         self.status = status
         self.headers = [("server", "mini_web 1.0")]
         self.headers += headers  # 列表相加
-
 
     def run_forever(self):
         while True:
