@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .box{
+        font-size:20px;
+        line-weight:30px;
+        text-indent:40px;
+        }
+        /* 层级选择器，中间用空格隔开*/
+        .box span{
+        color:red;
+        font-weight:bold;
+        }
+        /*类和标签组成的层级选择器*/
+        .box em{
+        font-style:normal;
+        text-decoration:underline;
+        font-weight:bold;
+        color:blue;
+        }
+        /*两个类组成的层级选择器*/
+        .box .span02{
+        color:green;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="box">
+    层级选择器:
+    层次选择器：通过html的dom元素间的层次关系获取元素，主要层次关系有 后代、父子、相邻兄弟和通用兄弟。
+    1. 后代选择器： E  F， 作用的是选择元素的后代元素。包括子元素、孙辈元素等。<span>（常用）</span>
+    2. 子选择器： E > F，作用的是某元素的所有子元素，不能包括孙辈元素（常用）
+    3. 相邻兄弟选择器： E + F, 选中的仅是一个元素。同级并且F元素在E元素的后面。<em>（很少用）</em>
+    4. 通用兄弟选择器： E ~ F，选中的可能是一个元素或多个元素，选中的是与E元素相邻的后面兄弟元素F及F之间的同级元素。<span class="span02">（很少用）</span>
+</div>
+
+<div class="box2">
+    层级选择器:
+    层次选择器：通过html的dom元素间的层次关系获取元素，主要层次关系有 后代、父子、相邻兄弟和通用兄弟。
+    1. 后代选择器： E  F， 作用的是选择元素的后代元素。包括子元素、孙辈元素等。<span>（常用）</span>
+    2.子选择器： E > F，作用的是某元素的所有子元素，不能包括孙辈元素（常用）
+    3.  相邻兄弟选择器： E + F, 选中的仅是一个元素。同级并且F元素在E元素的后面。（很少用）
+    4. 通用兄弟选择器： E ~ F，选中的可能是一个元素或多个元素，选中的是与E元素相邻的后面兄弟元素F及F之间的同级元素。（很少用）
+</div>
+
+
+
+</body>
+</html>

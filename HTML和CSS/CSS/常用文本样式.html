@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>常用文本样式</title>
+    <style type="text/css">
+        div{
+            font-size:20px;
+            color:green;
+            font-family:"Microsoft Yahei";
+            line-height:40px;
+            text-indent:40px;
+            /*text-decoration:underline;*/
+            /*font:normal 20px/40px "Microsoft Yahei";*/
+        }
+        em{
+        font-style:normal;
+        color:gold;
+        }
+        span{
+        font-size:30px;
+        color:red;
+        }
+        h1{
+        font-weight:normal;
+        }
+        a{
+       text-decoration:none;
+        }
+        p{
+        text-align:center;
+        }
+
+
+    </style>
+</head>
+<body>
+<h1>
+    样式演示
+</h1>
+<div>
+    <span>首先</span>是Car类的代码（见❶）。创建子类时，父类必须包含在当前文件中，且位于子类前面。在❷处，我们定义了子类<em>ElectricCar</em>。定义子类时，必须在括号内指定父类的名称。方法__init__()接受创建Car实例所需的信息（见❸）。
+❹处的super()是一个特殊函数，帮助Python将父类和子类关联起来。这行代码让Python调用ElectricCar的父类的方法__init__()，让ElectricCar实例包含父类的所有属性。父类也称为超类（superclass），名称super因此而得名。
+</div>
+<p>这是一个测试标签</p>
+<a href="http://kefhifi.com">博客链接</a>
+
+</body>
+</html>

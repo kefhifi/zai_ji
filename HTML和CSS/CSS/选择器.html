@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css" >
+    /*  星号表示所有选择器  */
+    /*    *{
+        font-size:20px;
+        }
+    */
+    /*    div{
+        color:red;
+        } */
+        /*  后面的样式会覆盖前面的样式，如 针对div内容（“第一个div测试”）下面的div1覆盖上面的div样式  */
+        #div1{
+        color:blue;
+        }
+
+        #div2{
+        font-size:30px;
+        font-weight:bold;
+        color:green;
+        }
+
+        /* 类选择器 */
+        .blue{
+        color:blue;
+        }
+        .big{
+        font-size:40px;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<!-- id不能重复，一般在程序里面使用，样式一般用class这种方式 -->
+<div id="div1">第一个div测试</div>
+<!-- id的样式优先级高于class，所以下面这行网页上显示还是green  -->
+<div id="div2" class="blue">第二个div测试</div>
+<p class="big">第三个div测试</p>
+<!-- 两个类选择器之前用空格隔开 -->
+<div class="blue big">第四个div测试</div>
+<p >第五个div测试</p>
+<p >第六个div测试</p>
+</body>
+</html>

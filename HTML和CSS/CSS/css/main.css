@@ -1,0 +1,6 @@
+/* div 选择器 ：页面上div标签的都用这种样式   */
+div{
+    /* front-size 默认大小 16px */
+    front-size:20px;
+    color:red;
+}

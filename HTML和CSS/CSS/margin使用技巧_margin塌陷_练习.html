@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .clearfix:before{  /* 解决塌陷的方法三(常用)：外面的盒子设置一个边框 */
+        content:"";
+        display:table;
+        }
+        .con{
+        width:200px;
+        height:200px;
+        background-color:gold;
+        border:1px solid #000;
+        /*overflow:hidden；*/ /* 解决塌陷的方法二：外面的盒子设置一个边框 */
+        }
+        .box{
+        width:120px;
+        height:50px;
+        margin-top:75px;
+        background-color:green;
+        margin-left:40px;  /*只有margin-top才有塌陷问题*/
+        }
+        .con1{
+        width:200px;
+        height:200px;
+        background-color:gold;
+        overflow:hidden； /* 解决塌陷的方法二：外面的盒子设置一个边框 */
+        }
+        .box1{
+        width:120px;
+        height:50px;
+        margin-top:75px;
+        background-color:green;
+        margin-left:40px;  /*只有margin-top才有塌陷问题*/
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="con">
+     <div class="box"></div>
+</div>
+
+<br />
+<div class="con1 clearfix">
+     <div class="box1"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+textarea 固定大小，滚动条，限制拖动，文字对齐
+取值：$("#ID").val();
+
+控制大小：加width,height限制(style="width:100px;height:200px;");或row,col限制(<textarea rows="5" cols="7">);
+
+限制拖动：              style="resize:none;"
+
+滚动条效果：           style="overflow:scroll;"
+
+对滚动条隐藏:
+
+       水平滚动条:     style="overflow-x:hidden;"
+
+       垂直滚动条:     style="overflow-y:hidden;"
+
+文字左对齐:
+
+        textarea会把开始标签到结束标签里的内容全部原样显示，包括空格和代码。
+
+如果要让内容从左上开始显示，就必须不留空格，即<textarea rows="" cols="">content</textarea>。
+
+但若   foreach 书写内容，且需要每次循环后换行 ，此时就需要 换行，且顶格写；
+
+eg： 下面的代码对齐方式有意为之，foreach 顶边线书写;
+
+             <textarea id="ID"  style="width:100px;height:200px;overflow:scroll;resize:none;" >
+
+<?php foreach($data as $val):?><?php echo $val;?><?php endforeach;?>
+             </textarea>
+
+
+
+代码：(style 可单独提到css中书写)
+
+     <textarea id="ID"  style="width:100px;height:200px;overflow:scroll;resize:none;" >
+
+content;
+</textarea>

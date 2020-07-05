@@ -6,27 +6,80 @@
 </head>
 <body>
 <h1>注册表单</h1>
-<form>
+<form action="http://kefhifi.com" method="post" align="center">
+    <!--数据提交到地址栏里面 是get方式（默认方式，没有method的是get方式） ，-->
+    <!--如果是post方式，数据是提交到http协议里面的 ，可以从http协议里面提取出数据，存到数据库里面去-->
+    <!-- action等于空的话，是提交到本地 -->
  <!--   <p>-->
     <div>
-    <label>用户名：</label>
-    <input type="text" name="" />
+        <!-- 加for属性和id 来激活用户名（鼠标点击用户名就激活输入框了）,id和for的值要一样 -->
+    <label for="username">用户名：</label>
+    <input type="text" name="username" id="username"/>
     </div>
 <!--   <br>-->
     <br />
 <!--    </p>-->
 <!--    <p>-->
     <div>
-    <label>密&nbsp;&nbsp;&nbsp;码：</label>
-    <input type="password" name="">
+    <label for="password">密&nbsp;&nbsp;&nbsp;码：</label>
+    <input type="password" name="password" id="password">
     </div>
     <br>
 <!--    </p>-->
 <div>
     <label>性&nbsp;&nbsp;&nbsp;别：</label>
-    <input type="radio" name=""> 男
-    <input type="radio" name=""> 女
+    <input type="radio" name="gender" value="male" id="male"> <label for="male">男</label>
+    <input type="radio" name="gender" value="female" id="female"> <label for="female">女</label>
 </div>
+<br>
+<div>
+    <label>爱&nbsp;&nbsp;&nbsp;好：</label>
+    <input type="checkbox" name="like" value="study" id="study"> <label for="study">学习</label>
+    <input type="checkbox" name="like" value="sports" id="sports"> <label for="sports">体育</label>
+    <input type="checkbox" name="like" value="music" id="music"> <label for="music">音乐</label>
+    <input type="checkbox" name="like" value="movie" id="movie"> <label for="movie">影视</label>
+</div>
+<br>
+<div>
+    <label>照&nbsp;&nbsp;&nbsp;片：</label>
+    <input type="file" name="">
+</div>
+<br>
+<div>
+    <label >个人介绍：</label>
+    <textarea name="introduce" style="width:800px;height:50px;resize:none;"></textarea>
+</div>
+<br>
+<div>
+    <label>籍&nbsp;&nbsp;&nbsp;贯：</label>
+    <select name="site">
+        <option value="beijing">北京</option>
+        <option value="shanghai">上海</option>
+        <option value="shenzhen">深圳</option>
+        <option value="sichuan">四川</option>
+        <option value="chongqing">重庆</option>
+        <option value="xianggang">香港</option>
+    </select>
+</div>
+<br>
+<div>
+    <input type="submit" name="" value="提交">
+    &nbsp;&nbsp;&nbsp;
+    <input type="reset" name="" value="重置">
+</div>
+
+<!-- hidden 存一个值在页面上 -->
+<input type="hidden" name="hide1" value="123">
+
+<br>
+    <!--用图片来提交 有bug，后面用样式来提交就没有bug了-->
+<div>
+    <input type="image" src="../images/basa.jpg" name="">
+    &nbsp;&nbsp;&nbsp;
+    <input type="reset" name="" value="重置">
+</div>
+
+
 
 </form>
 
