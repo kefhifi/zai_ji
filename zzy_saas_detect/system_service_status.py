@@ -29,9 +29,22 @@ class SystemStatus():
             # print(result)
             if result.status == 200:
                 self.__status = 1
+            else:
+                self.__status = 0
 
-    def go(self):
+    def __read_mysql(self):
+        pass
+
+    def __write_redis(self):
+        pass
+
+    def fetch_status(self):
+        pass
+
+
+    def detect_status(self):
         self.__status_detect()
+
 
 
 
@@ -40,7 +53,12 @@ class SystemStatus():
 def main():
     service = SystemStatus("https://semm.zhizhangyi.com:3000/emm", "SEMM", "127.0.0.1", 3306, "123456", "system_status",
                            "127.0.0.1", 39328, "123456")
-    service.go()
+    if fetch_status == None:
+        service.detect_status()
+        fetch_status
+
+
+
 
 if __name__ == "__main__":
     main()
