@@ -80,15 +80,15 @@ def web_server()
 
 def main():
     ## saas_service = SystemStatus("https://semm.zhizhangyi.com:3000/emm", "SEMM", "127.0.0.1", 3306, "123456", "system_status",
-                           "127.0.0.1", 39328, "123456")
+    #                       "127.0.0.1", 39328, "123456")
     # if saas_service.fetch_status == None:
     ## saas_service.detect_status()
     # service.fetch_status
 	# 面向过程
 	
-	process_update = multiprocessing.Process(target=update_mysql_and_redis_stat, args=(,)) 
+	update_process = multiprocessing.Process(target=update_mysql_and_redis_stat, args=(,)) 
 	server_process = multiprocessing.Process(target=web_server, args=(,))   
-	process_update.start()
+	update_process.start()
 	server_process.start()	
 		
 
