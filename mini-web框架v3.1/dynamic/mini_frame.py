@@ -57,6 +57,11 @@ def application(environ, set_response_header):
     else:
         return "Hello World %s 测试" % time.ctime()
     """
-    fun = g_fun_dict[file_name]
-    return fun()
+    try:
+        # fun = g_fun_dict[file_name]
+        # return fun()
+        return g_fun_dict[file_name]()
+    except Exception as ret:
+        return "产生了异常：%s" % str(ret)
+
 
