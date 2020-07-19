@@ -31,13 +31,23 @@ def index():
     return "这是主页"
 
 
+g_fun_dict = {
+    "/login.py": login,
+    "/index.py": index
+}
+
+
 def application(environ, set_response_header):
     set_response_header("200 OK", [("Content-Type", "text/html;charset=utf-8")])
     file_name = environ["PATH_INFO"]
+    """
     if file_name == "/login.py":
         return login()
     elif file_name == "/index.py":
         return index()
     else:
         return "Hello World %s 测试" % time.ctime()
+    """
+    fun = g_fun_dict[file_name]
+    return fun()
 
