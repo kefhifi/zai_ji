@@ -23,27 +23,18 @@ import time
 #     else:
 #         return "not found the page!"
 
-g_fun_dict = dict()
-
-
-def route(uri):
-    def set_fun(func):
-        g_fun_dict[uri] = func
-        # g_fun_dict["/index.py"] = index
-        def call_fun(*args, **kwargs):
-            return func(*args, **kwargs)
-        return call_fun
-    return set_fun
-
-
-@route("/login.py")
 def login():
     return "这是登录页面"
 
 
-@route("/index.py")
 def index():
     return "这是主页"
+
+
+g_fun_dict = {
+    "/login.py": login,
+    "/index.py": index
+}
 
 
 def application(environ, set_response_header):
